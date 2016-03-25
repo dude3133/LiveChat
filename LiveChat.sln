@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat.Presentation", "LiveChat\LiveChat.Presentation.csproj", "{B031B40E-4843-4172-9AC4-2069F039D714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat.Tests", "LiveChat.Tests\LiveChat.Tests.csproj", "{2873D9DC-1D2B-4580-B4E0-A55181E951D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3A3ABD3D-B2CC-40C2-B68B-6EFB992EDC87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat.Domain.Models", "LiveChat.Domain.Models\LiveChat.Domain.Models.csproj", "{9753147E-C7C9-4DD4-A3D4-49B376B76388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat.Domain.Services", "LiveChat.Domain.Services\LiveChat.Domain.Services.csproj", "{FE30BCA0-FCE2-4661-B41F-6197957A76A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat.DataAccess.Entities", "LiveChat.DataAcces.Entities\LiveChat.DataAccess.Entities.csproj", "{9B888AAD-91A7-4505-B6FA-04D4FCA38590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveChat.DataAccess.Configuration", "LiveChat.DataAccess.Configuration\LiveChat.DataAccess.Configuration.csproj", "{58887166-FCE3-4F9B-8DE9-F164D7706D45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B031B40E-4843-4172-9AC4-2069F039D714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B031B40E-4843-4172-9AC4-2069F039D714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B031B40E-4843-4172-9AC4-2069F039D714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B031B40E-4843-4172-9AC4-2069F039D714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2873D9DC-1D2B-4580-B4E0-A55181E951D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2873D9DC-1D2B-4580-B4E0-A55181E951D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2873D9DC-1D2B-4580-B4E0-A55181E951D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2873D9DC-1D2B-4580-B4E0-A55181E951D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9753147E-C7C9-4DD4-A3D4-49B376B76388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9753147E-C7C9-4DD4-A3D4-49B376B76388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9753147E-C7C9-4DD4-A3D4-49B376B76388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9753147E-C7C9-4DD4-A3D4-49B376B76388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE30BCA0-FCE2-4661-B41F-6197957A76A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE30BCA0-FCE2-4661-B41F-6197957A76A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE30BCA0-FCE2-4661-B41F-6197957A76A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE30BCA0-FCE2-4661-B41F-6197957A76A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B888AAD-91A7-4505-B6FA-04D4FCA38590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B888AAD-91A7-4505-B6FA-04D4FCA38590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B888AAD-91A7-4505-B6FA-04D4FCA38590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B888AAD-91A7-4505-B6FA-04D4FCA38590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58887166-FCE3-4F9B-8DE9-F164D7706D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58887166-FCE3-4F9B-8DE9-F164D7706D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58887166-FCE3-4F9B-8DE9-F164D7706D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58887166-FCE3-4F9B-8DE9-F164D7706D45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2873D9DC-1D2B-4580-B4E0-A55181E951D0} = {3A3ABD3D-B2CC-40C2-B68B-6EFB992EDC87}
+	EndGlobalSection
+EndGlobal
