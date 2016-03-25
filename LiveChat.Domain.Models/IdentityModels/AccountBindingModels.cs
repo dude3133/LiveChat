@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
-namespace LiveChat.Models
+namespace LiveChat.Domain.Models
 {
     // Models used as parameters to AccountController actions.
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LiveChat.Models
+namespace LiveChat.Domain.Models
 {
     // Models returned by AccountController actions.
 

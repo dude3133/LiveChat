@@ -12,9 +12,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using LiveChat.Models;
 using LiveChat.Providers;
 using LiveChat.Results;
+using LiveChat.DataAccess.Configuration;
+using LiveChat.Domain.Models;
+using LiveChat.DataAccess.Entities;
 
 namespace LiveChat.Controllers
 {

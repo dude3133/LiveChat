@@ -244,9 +244,6 @@
       <DependentUpon>201603201959512_Added fields for IdentityUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -332,6 +329,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LiveChat.DataAcces.Entities\LiveChat.DataAccess.Entities.csproj">
+      <Project>{9b888aad-91a7-4505-b6fa-04d4fca38590}</Project>
+      <Name>LiveChat.DataAccess.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LiveChat.DataAccess.Configuration\LiveChat.DataAccess.Configuration.csproj">
       <Project>{58887166-fce3-4f9b-8de9-f164d7706d45}</Project>
       <Name>LiveChat.DataAccess.Configuration</Name>

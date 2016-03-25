@@ -6,7 +6,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using LiveChat.Models;
+using LiveChat.DataAccess.Configuration;
+using LiveChat.DataAccess.Entities;
 
 namespace LiveChat.Providers
 {

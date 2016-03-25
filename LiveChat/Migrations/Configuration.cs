@@ -1,8 +1,9 @@
 namespace LiveChat.Migrations
 {
+    using DataAccess.Configuration;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<LiveChat.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -10,7 +11,7 @@ namespace LiveChat.Migrations
             ContextKey = "LiveChat.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(LiveChat.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

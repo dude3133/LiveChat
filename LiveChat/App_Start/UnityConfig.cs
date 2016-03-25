@@ -1,10 +1,10 @@
 ﻿using LiveChat.DataAccess.Configuration;
-using LiveChat.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Practices.Unity;
 using Owin;
+using LiveChat.DataAccess.Entities;
 
 namespace LiveChat
 {
