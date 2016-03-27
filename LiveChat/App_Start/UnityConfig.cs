@@ -5,6 +5,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Practices.Unity;
 using Owin;
 using LiveChat.DataAccess.Entities;
+using LiveChat.Domain.Services;
 
 namespace LiveChat
 {
@@ -30,8 +31,10 @@ namespace LiveChat
             // Identity
             container.RegisterType<IdentityUser, ApplicationUser>();
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
-            //container.RegisterType<IdentityDbContext<ApplicationUser>, LiveChatIdentityContext>();
-            //container.RegisterType<ILiveChatIdentityProvider, EventServeIdentityProvider>();
+            container.RegisterType<IAuthService, AuthService>();
+            container.RegisterType<IdentityDbContext<ApplicationUser>, ApplicationDbContext>();
+            container.RegisterType<IApplicationContextProvider, ApplicationContextProvider>();
+            //container.RegisterType<IIdentityMessageService,EmailService>();
             //container.RegisterType<IExternalAccessTokenProvider, ExternalAccessTokenProvider>();
 
 

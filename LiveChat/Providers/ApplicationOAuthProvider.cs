@@ -8,44 +8,56 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using LiveChat.DataAccess.Configuration;
 using LiveChat.DataAccess.Entities;
+using LiveChat.Domain.Services;
+using Microsoft.AspNet.Identity;
+using System.Linq;
 
 namespace LiveChat.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
+        private readonly IAuthService _authService;
         private readonly string _publicClientId;
 
-        public ApplicationOAuthProvider(string publicClientId)
+        public ApplicationOAuthProvider(IAuthService authService,string publicClientId)
         {
             if (publicClientId == null)
             {
                 throw new ArgumentNullException("publicClientId");
             }
 
+            _authService = authService;
             _publicClientId = publicClientId;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            ApplicationUser user = await _authService.FindUser(context.UserName, context.Password);
 
             if (user == null)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
             }
+            if (user.Banned)
+            {
+                context.SetError("invalid_grant", "User is banned");
+                return;
+            }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
+            if (user.Suspended)
+            {
+                context.SetError("invalid_grant", "User is suspended");
+                return;
+            }
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            ClaimsIdentity oAuth = await _authService
+                .CreateIdentity(user, DefaultAuthenticationTypes.ExternalBearer);
+            List<Claim> roles = oAuth.Claims
+                .Where(c => c.Type == ClaimTypes.Role).ToList();
+            AuthenticationProperties properties = CreateProperties(user.UserName, roles);
+            AuthenticationTicket ticket = new AuthenticationTicket(oAuth, properties);
             context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
@@ -84,11 +96,13 @@ namespace LiveChat.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string userName, List<Claim> roles)
         {
+            string rolesString = Newtonsoft.Json.JsonConvert.SerializeObject(roles.Select(x => x.Value));
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                {"userName", userName},
+                {"roles", rolesString}
             };
             return new AuthenticationProperties(data);
         }

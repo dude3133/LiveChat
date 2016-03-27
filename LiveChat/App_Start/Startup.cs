@@ -6,6 +6,12 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using LiveChat.Providers;
 using LiveChat.DataAccess.Configuration;
+using Microsoft.AspNet.SignalR;
+using LiveChat.App_Start;
+using System.Web.Http;
+using Unity.WebApi;
+using LiveChat.Domain.Services;
+using Microsoft.Practices.Unity;
 
 [assembly: OwinStartup(typeof(LiveChat.Startup))]
 
@@ -15,9 +21,29 @@ namespace LiveChat
     {
         public void Configuration(IAppBuilder app)
         {
-            app.MapSignalR();
-            ConfigureAuth(app);
             UnityConfig.RegisterComponents(app);
+
+            ConfigureAuth(app);
+
+            app.UseWebApi(RegisterHttpConfiguration());
+            app.MapSignalR("/signalr", new HubConfiguration
+            {
+                EnableDetailedErrors = true,
+                Resolver = new UnityHubConfig(),
+                EnableJavaScriptProxies = false
+            });
+
+
+        }
+
+        public static HttpConfiguration RegisterHttpConfiguration()
+        {
+            HttpConfiguration config = new HttpConfiguration
+            {
+                DependencyResolver = new UnityDependencyResolver(UnityConfig.Container)
+            };
+            WebApiConfig.Register(config);
+            return config;
         }
 
         #region Auth
@@ -42,7 +68,7 @@ namespace LiveChat
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId),
+                Provider = new ApplicationOAuthProvider(UnityConfig.Container.Resolve<IAuthService>(),PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 // In production mode set AllowInsecureHttp = false

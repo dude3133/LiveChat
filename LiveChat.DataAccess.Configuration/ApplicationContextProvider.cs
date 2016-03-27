@@ -15,7 +15,7 @@ namespace LiveChat.DataAccess.Configuration
 
     public class ApplicationContextProvider : IApplicationContextProvider
     {
-        private readonly IIdentityMessageService _service;
+        //private readonly IIdentityMessageService _service;
         private readonly IDataProtectionProvider _dataProtectionProvider;
 
         public IdentityDbContext<ApplicationUser> Context
@@ -23,10 +23,10 @@ namespace LiveChat.DataAccess.Configuration
             get { return new ApplicationDbContext(); }
         }
 
-        public ApplicationContextProvider(IDataProtectionProvider provider, IIdentityMessageService service)
+        public ApplicationContextProvider(IDataProtectionProvider provider)//, IIdentityMessageService service)
         {
             _dataProtectionProvider = provider;
-            _service = service;
+            //_service = service;
         }
 
         public UserManager<ApplicationUser> GetUserManager(IdentityDbContext<ApplicationUser> context)
@@ -34,7 +34,7 @@ namespace LiveChat.DataAccess.Configuration
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(context);
             ApplicationUserManager userManager = new ApplicationUserManager(userStore)
             {
-                EmailService = _service,
+                //EmailService = _service,
                 UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(
                     _dataProtectionProvider.Create("ASP.NET Identity"))
                 {
