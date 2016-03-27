@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace LiveChat.DataAcces.Entities.Models
 {
-    public class AspNetUser
+    public class AspNetUser : BaseEntity
     {
         public AspNetUser()
         {
             AspNetUserClaims = new List<AspNetUserClaim>();
             AspNetUserLogins = new List<AspNetUserLogin>();
             AspNetRoles = new List<AspNetRole>();
+            SendMessages = new List<Message>();
+            ReceivedMessages = new List<Message>();
         }
 
         public string Id { get; set; }
@@ -20,12 +22,14 @@ namespace LiveChat.DataAcces.Entities.Models
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
+        public DateTime? LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<Message> SendMessages { get; set; }
+        public virtual ICollection<Message> ReceivedMessages { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

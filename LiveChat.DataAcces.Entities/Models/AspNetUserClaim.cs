@@ -1,6 +1,6 @@
 namespace LiveChat.DataAcces.Entities.Models
 {
-    public class AspNetUserClaim
+    public class AspNetUserClaim : BaseEntity
     {
         public int Id { get; set; }
         public string UserId { get; set; }
