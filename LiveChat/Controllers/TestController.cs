@@ -10,16 +10,16 @@ namespace LiveChat.Controllers
 {
     public class TestController : ApiController
     {
+        //[Authorize]
+        //public string Get()
+        //{
+        //    var x = User.Identity.GetUserId();
+        //    return "Your id is "+x;
+        //}
         [Authorize]
         public string Get()
         {
-            var x = User.Identity.GetUserId();
-            return "Your id is "+x;
-        }
-
-        public int Get(int a)
-        {
-            return a;
+            return "Registered";
         }
     }
 }

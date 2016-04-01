@@ -14,7 +14,12 @@ namespace LiveChat.Domain.Models.Mappers
 
     public class MessageReturnModelMapper : IMessageReturnModelMapper
     {
+        private IUserReturnModelMapper userReturnModelMapper;
 
+        public MessageReturnModelMapper(IUserReturnModelMapper _userReturnModelMapper)
+        {
+            userReturnModelMapper = _userReturnModelMapper;
+        }
 
         public MessageReturnModel Map(Message msg)
         {
@@ -23,8 +28,8 @@ namespace LiveChat.Domain.Models.Mappers
                 Id = msg.Id,
                 Text = msg.Text,
                 Time = msg.Time,
-                UserAuthor = msg.Author,
-                UserRecipient = msg.Recipient
+                UserAuthor = userReturnModelMapper.Map(msg.Author),
+                UserRecipient = userReturnModelMapper.Map(msg.Recipient)
             };
         }
     }

@@ -9,12 +9,11 @@
         /// </summary>
         ILiveChatContext Context { get; }
     }
-    class LiveChatContextProvider : ILiveChatContextProvider
-        {
-
-            public ILiveChatContext Context
-            {
-                get { return new LiveChatContext(); }
-            }
-        }
+    public class LiveChatContextProvider : ILiveChatContextProvider
+    {
+       public ILiveChatContext Context
+       {
+           get { return new LiveChatContext(); }
+       }
     }
+}

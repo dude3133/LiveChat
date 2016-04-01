@@ -8,7 +8,7 @@ namespace LiveChat.Domain.Models
         public int Id { get; set; }
         public string Text { get; set; }
         public DateTime Time { get; set; }
-        public AspNetUser UserAuthor { get; set; }
-        public AspNetUser UserRecipient { get; set; }
+        public UserReturnModel UserAuthor { get; set; }
+        public UserReturnModel UserRecipient { get; set; }
     }
 }

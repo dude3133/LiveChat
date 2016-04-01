@@ -18,18 +18,18 @@ namespace LiveChat.Domain.Services
 
     public class UserService : IUserService
     {
-        private readonly ILiveChatContextProvider _eventServeContextProvider;
+        private readonly ILiveChatContextProvider _liveChatContextProvider;
 
 
         public UserService(
             ILiveChatContextProvider eventServeContexProvider)
         {
-            _eventServeContextProvider = eventServeContexProvider;
+            _liveChatContextProvider = eventServeContexProvider;
         }
 
         public async Task<IEnumerable<AspNetUser>> AllUsers()
         {
-            using (ILiveChatContext context = _eventServeContextProvider.Context)
+            using (ILiveChatContext context = _liveChatContextProvider.Context)
             {
                 IEnumerable<AspNetUser> users = await context.AspNetUsers.ToListAsync();
                 //IEnumerable<TruncatedUser> truncatedUsers = users
@@ -40,7 +40,7 @@ namespace LiveChat.Domain.Services
 
         public async Task<AspNetUser> GetTruncatedUserByLogin(string name)
         {
-            using (ILiveChatContext context = _eventServeContextProvider.Context)
+            using (ILiveChatContext context = _liveChatContextProvider.Context)
             {
                 AspNetUser user = await context.AspNetUsers
                     .Where(u => u.UserName == name).FirstOrDefaultAsync();
@@ -51,7 +51,7 @@ namespace LiveChat.Domain.Services
 
         public async Task<AspNetUser> GetUserByLogin(string userName)
         {
-            using (ILiveChatContext context = _eventServeContextProvider.Context)
+            using (ILiveChatContext context = _liveChatContextProvider.Context)
             {
                 AspNetUser user = await context.AspNetUsers
                     .Where(p => p.UserName == userName)

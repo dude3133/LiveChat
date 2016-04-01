@@ -84,9 +84,12 @@
     <Compile Include="IdentityModels\AccountBindingModels.cs" />
     <Compile Include="IdentityModels\AccountViewModels.cs" />
     <Compile Include="Mappers\MessageReturnModelMapper.cs" />
+    <Compile Include="Mappers\UserReturnModelMapper.cs" />
+    <Compile Include="MessageBindingModel.cs" />
     <Compile Include="MessageReturnModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUserBindingModel.cs" />
+    <Compile Include="UserReturnModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

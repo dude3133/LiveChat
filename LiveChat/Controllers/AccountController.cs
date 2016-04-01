@@ -35,9 +35,7 @@ namespace LiveChat.Controllers
             }
             var user = await _authService.FindUser(registerUserModel.Username, registerUserModel.Password);
             //await _emailConfirmService.SendConfirmationEmail(user, Url);
-            Uri locationHeader = new Uri(Url.Link("/user",
-                new { name = user.UserName }));
-            return Created(locationHeader, user);
+            return Ok(user);
         }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)

@@ -10,11 +10,11 @@ namespace LiveChat.DataAccess.Configuration
 {
     public interface ILiveChatContext : IDisposable
     {
-        DbSet<AspNetRole> AspNetRoles { get; set; }
-        DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        DbSet<AspNetUser> AspNetUsers { get; set; }
-        DbSet<Message> Messages { get; set; }
+        IDbSet<AspNetRole> AspNetRoles { get; set; }
+        IDbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        IDbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        IDbSet<AspNetUser> AspNetUsers { get; set; }
+        IDbSet<Message> Messages { get; set; }
 
         Task<int> SaveChangesAsync();
     }
@@ -27,15 +27,15 @@ namespace LiveChat.DataAccess.Configuration
         }
 
         public LiveChatContext()
-            : base("Name=LiveChatDbContext")
+            : base("Name=DefaultConnection")
         {
         }
 
-        public DbSet<AspNetRole> AspNetRoles { get; set; }
-        public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public DbSet<AspNetUser> AspNetUsers { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        public IDbSet<AspNetRole> AspNetRoles { get; set; }
+        public IDbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public IDbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public IDbSet<AspNetUser> AspNetUsers { get; set; }
+        public IDbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

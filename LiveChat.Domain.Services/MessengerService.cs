@@ -13,9 +13,22 @@ namespace LiveChat.Domain.Services
 {
     public interface IMessengerService
     {
-        Task<IEnumerable<MessageReturnModel>> GetLastMessages(string author, string recipient);
+        Task<IEnumerable<MessageReturnModel>> GetLastMessages(string author, string recipient,int count = 10);
+        /// <summary>
+        /// Gives messages from some dialog with offset and where Id of oldest message is bigger than lastId
+        /// </summary>
+        /// <param name="author">Username of author</param>
+        /// <param name="recipient">Username of recipient</param>
+        /// <param name="count">Count of messages</param>
+        /// <param name="offset">Offset</param>
+        /// <param name="lastId">Id of oldest message that should be taken</param>
+        /// <returns></returns>
+        Task<IEnumerable<MessageReturnModel>> GetMessages(string author, string recipient, int count = 1, int offset = 10, int lastId = 1);
         Task<IEnumerable<MessageReturnModel>> GetChattingHistory(string author);
+        Task SaveMessage(MessageBindingModel model);
         Task SaveMessage(string author, string recipient, string text);
+        Task ReadMessagesFromDialog(string author, string recipient);
+        Task<IEnumerable<MessageReturnModel>> GetUnreadMessagesFromDialog(string author, string recipient);
         Task<string> GetImageUrlByName(string name);
     }
 
@@ -51,7 +64,8 @@ namespace LiveChat.Domain.Services
                 {
                     Author_Id = getAuthorTask.Result.Id,
                     Recipient_Id = getRecipientTask.Result.Id,
-                    Time = DateTime.UtcNow.AddHours(3),
+                    Time = DateTime.UtcNow,
+                    WasRead = false,
                     Text = text,
                     State = EntityState.Added
                 };
@@ -59,8 +73,30 @@ namespace LiveChat.Domain.Services
                 await context.SaveChangesAsync();
             }
         }
+        public async Task SaveMessage(MessageBindingModel model)
+        {
+            using (ILiveChatContext context = _liveChatContextProvider.Context)
+            {
+                var Recipient_Id = (await context.AspNetUsers.Where(x => x.UserName == model.RecipientUsername).FirstOrDefaultAsync()).Id;
+                if (model.AuthorId == Recipient_Id)
+                {
+                    return;
+                }
+                Message message = new Message
+                {
+                    Author_Id = model.AuthorId,
+                    Recipient_Id = Recipient_Id,
+                    WasRead = false,
+                    Time = DateTime.UtcNow,
+                    Text = model.Text,
+                    State = EntityState.Added
+                };
+                context.Messages.Add(message);
+                await context.SaveChangesAsync();
+            }
+        }
 
-        public async Task<IEnumerable<MessageReturnModel>> GetLastMessages(string author, string recipient)
+        public async Task<IEnumerable<MessageReturnModel>> GetLastMessages(string author, string recipient,int count = 10)
         {
             using (ILiveChatContext context = _liveChatContextProvider.Context)
             {
@@ -68,7 +104,7 @@ namespace LiveChat.Domain.Services
                     .Where(m => (m.Author.UserName == author && m.Recipient.UserName == recipient) ||
                                 (m.Author.UserName == recipient && m.Recipient.UserName == author))
                     .OrderByDescending(m => m.Time)
-                    .Take(10)
+                    .Take(count)
                     .OrderBy(m => m.Time)
                     .Select(m => new
                     {
@@ -131,9 +167,65 @@ namespace LiveChat.Domain.Services
 
         private static void TruncateMessageText(MessageReturnModel mes)
         {
-            if (mes.Text.Length >= 1000)
+            if (mes.Text.Length >= 127)
             {
-                mes.Text = mes.Text.Substring(0, 1000) + "...";
+                mes.Text = mes.Text.Substring(0, 127) + "...";
+            }
+        }
+
+        public async Task<IEnumerable<MessageReturnModel>> GetMessages(string author, string recipient, int count = 1, int offset = 10, int lastId = 1)
+        {
+            using (ILiveChatContext context = _liveChatContextProvider.Context)
+            {
+                var messages = await context.Messages
+                    .Where(m => (m.Author.UserName == author && m.Recipient.UserName == recipient) ||
+                                (m.Author.UserName == recipient && m.Recipient.UserName == author))
+                    .OrderByDescending(m => m.Time)
+                    .Skip(offset)
+                    .Take(count)
+                    .OrderBy(m => m.Time)
+                    .Select(m => new
+                    {
+                        Message = m,
+                        m.Author,
+                        m.Recipient
+                    }).ToListAsync();
+                var returnModel = messages.Select(s => _messageReturnModelMapper.Map(s.Message));
+                return returnModel;
+            }
+        }
+
+        public async Task ReadMessagesFromDialog(string author, string recipient)
+        {
+            using (ILiveChatContext context = _liveChatContextProvider.Context)
+            {
+                var messages = await context.Messages
+                   .Where(m => (m.Author.UserName == author && m.Recipient.UserName == recipient) ||
+                               (m.Author.UserName == recipient && m.Recipient.UserName == author))
+                   .Where(m => !m.WasRead)
+                   .ToListAsync();
+                messages.ForEach(m => { m.WasRead = true; m.State = EntityState.Modified; });
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<MessageReturnModel>> GetUnreadMessagesFromDialog(string author, string recipient)
+        {
+            using (ILiveChatContext context = _liveChatContextProvider.Context)
+            {
+                var messages = await context.Messages
+                   .Where(m => (m.Author.UserName == author && m.Recipient.UserName == recipient) ||
+                               (m.Author.UserName == recipient && m.Recipient.UserName == author))
+                   .Where(m => !m.WasRead)
+                   .OrderBy(m => m.Time)
+                   .Select(m => new
+                   {
+                       Message = m,
+                       m.Author,
+                       m.Recipient
+                   }).ToListAsync();
+                var returnModel = messages.Select(s => _messageReturnModelMapper.Map(s.Message));
+                return returnModel;
             }
         }
     }
