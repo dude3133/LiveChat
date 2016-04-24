@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LiveChat.DataAcces.Entities.Models
+namespace LiveChat.DataAccess.Entities.Models
 {
     public class AspNetUser : BaseEntity
     {
@@ -28,6 +28,10 @@ namespace LiveChat.DataAcces.Entities.Models
         public string UserName { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<FriendRequest> FriendRequests { get; set; }
+        public virtual ICollection<FriendRequest> FriendRequests1 { get; set; }
+        public virtual ICollection<Friend> Friends { get; set; }
+        public virtual ICollection<Friend> Friends1 { get; set; }
         public virtual ICollection<Message> SendMessages { get; set; }
         public virtual ICollection<Message> ReceivedMessages { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }

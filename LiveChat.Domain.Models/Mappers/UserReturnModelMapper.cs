@@ -1,9 +1,4 @@
-﻿using LiveChat.DataAcces.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LiveChat.DataAccess.Entities.Models;
 
 namespace LiveChat.Domain.Models.Mappers
 {

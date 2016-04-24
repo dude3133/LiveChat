@@ -1,5 +1,4 @@
 ﻿using System;
-using LiveChat.DataAcces.Entities.Models;
 
 namespace LiveChat.Domain.Models
 {

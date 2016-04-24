@@ -1,4 +1,4 @@
-﻿using LiveChat.DataAcces.Entities.Models;
+﻿using LiveChat.DataAccess.Entities.Models;
 using LiveChat.DataAccess.Configuration;
 using LiveChat.Domain.Models;
 using LiveChat.Domain.Models.Mappers;
@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LiveChat.Domain.Services
@@ -56,8 +55,8 @@ namespace LiveChat.Domain.Services
             }
             using (ILiveChatContext context = _liveChatContextProvider.Context)
             {
-                Task<AspNetUser> getAuthorTask = _userService.GetUserByLogin(author);
-                Task<AspNetUser> getRecipientTask = _userService.GetUserByLogin(recipient);
+                Task<UserReturnModel> getAuthorTask = _userService.GetUserByLogin(author);
+                Task<UserReturnModel> getRecipientTask = _userService.GetUserByLogin(recipient);
                 await Task.WhenAll(getAuthorTask, getRecipientTask);
 
                 Message message = new Message

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LiveChat.DataAcces.Entities.Models
+namespace LiveChat.DataAccess.Entities.Models
 {
     public partial class Message : BaseEntity
     {

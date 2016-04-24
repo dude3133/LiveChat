@@ -44,6 +44,7 @@ namespace LiveChat
 
             container.RegisterType<IMessageReturnModelMapper, MessageReturnModelMapper>();
             container.RegisterType<IUserReturnModelMapper, UserReturnModelMapper>();
+            container.RegisterType<IFriendRequestReturnModelMapper, FriendRequestReturnModelMapper>();
         }
     }
 }

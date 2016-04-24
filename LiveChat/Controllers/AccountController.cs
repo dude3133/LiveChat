@@ -1,6 +1,5 @@
 ﻿using LiveChat.Domain.Models;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LiveChat.Domain.Services;

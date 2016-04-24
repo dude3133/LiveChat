@@ -92,6 +92,8 @@
     <Compile Include="Mapping\AspNetUserClaimMap.cs" />
     <Compile Include="Mapping\AspNetUserLoginMap.cs" />
     <Compile Include="Mapping\AspNetUserMap.cs" />
+    <Compile Include="Mapping\FriendMap.cs" />
+    <Compile Include="Mapping\FriendRequestMap.cs" />
     <Compile Include="Mapping\MessageMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

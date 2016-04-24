@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR.Owin;
-using System;
 using System.Security.Claims;
 
 namespace LiveChat.Hubs

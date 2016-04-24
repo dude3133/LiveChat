@@ -1,5 +1,5 @@
 using System.Data.Entity.ModelConfiguration;
-using LiveChat.DataAcces.Entities.Models;
+using LiveChat.DataAccess.Entities.Models;
 
 namespace LiveChat.DataAccess.Configuration.Mapping
 {

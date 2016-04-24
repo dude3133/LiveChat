@@ -1,4 +1,4 @@
-﻿using LiveChat.DataAcces.Entities.Models;
+﻿using LiveChat.DataAccess.Entities.Models;
 using System.Data.Entity.ModelConfiguration;
 
 namespace LiveChat.DataAccess.Configuration.Mapping

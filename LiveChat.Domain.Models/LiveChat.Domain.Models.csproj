@@ -81,8 +81,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FriendRequestReturnModel.cs" />
     <Compile Include="IdentityModels\AccountBindingModels.cs" />
     <Compile Include="IdentityModels\AccountViewModels.cs" />
+    <Compile Include="Mappers\FriendRequestReturnModelMapper.cs" />
     <Compile Include="Mappers\MessageReturnModelMapper.cs" />
     <Compile Include="Mappers\UserReturnModelMapper.cs" />
     <Compile Include="MessageBindingModel.cs" />

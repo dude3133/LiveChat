@@ -238,6 +238,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -251,6 +252,10 @@
     <Compile Include="Migrations\201603201959512_Added fields for IdentityUser.cs" />
     <Compile Include="Migrations\201603201959512_Added fields for IdentityUser.Designer.cs">
       <DependentUpon>201603201959512_Added fields for IdentityUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604231929139_AddedFriends.cs" />
+    <Compile Include="Migrations\201604231929139_AddedFriends.Designer.cs">
+      <DependentUpon>201604231929139_AddedFriends.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -334,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603201959512_Added fields for IdentityUser.resx">
       <DependentUpon>201603201959512_Added fields for IdentityUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604231929139_AddedFriends.resx">
+      <DependentUpon>201604231929139_AddedFriends.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

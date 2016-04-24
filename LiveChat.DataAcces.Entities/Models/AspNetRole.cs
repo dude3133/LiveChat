@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace LiveChat.DataAcces.Entities.Models
+namespace LiveChat.DataAccess.Entities.Models
 {
     public class AspNetRole
     {

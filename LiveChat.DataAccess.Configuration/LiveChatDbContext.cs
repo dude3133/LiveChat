@@ -1,10 +1,10 @@
 using System.Data.Entity;
 using LiveChat.DataAccess.Configuration.Mapping;
-using LiveChat.DataAcces.Entities.Models;
+using LiveChat.DataAccess.Entities.Models;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using LiveChat.DataAcces.Entities;
+using LiveChat.DataAccess.Entities;
 
 namespace LiveChat.DataAccess.Configuration
 {
@@ -14,6 +14,8 @@ namespace LiveChat.DataAccess.Configuration
         IDbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         IDbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         IDbSet<AspNetUser> AspNetUsers { get; set; }
+        IDbSet<FriendRequest> FriendRequests { get; set; }
+        IDbSet<Friend> Friends { get; set; }
         IDbSet<Message> Messages { get; set; }
 
         Task<int> SaveChangesAsync();
@@ -35,6 +37,8 @@ namespace LiveChat.DataAccess.Configuration
         public IDbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public IDbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public IDbSet<AspNetUser> AspNetUsers { get; set; }
+        public IDbSet<FriendRequest> FriendRequests { get; set; }
+        public IDbSet<Friend> Friends { get; set; }
         public IDbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -44,6 +48,8 @@ namespace LiveChat.DataAccess.Configuration
             modelBuilder.Configurations.Add(new AspNetUserLoginMap());
             modelBuilder.Configurations.Add(new AspNetUserMap());
             modelBuilder.Configurations.Add(new MessageMap());
+            modelBuilder.Configurations.Add(new FriendRequestMap());
+            modelBuilder.Configurations.Add(new FriendMap());
         }
 
         public void Update<T>(T entity) where T : BaseEntity
